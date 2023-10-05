@@ -3,6 +3,7 @@ const { createWallet, deleteWallet } = require('../controller/wallet.controller'
 const walletModel = require('../models/wallet.model')
 const connect = require('../config/mongo')
 const mongoose = require("mongoose")
+const { updateLoginTime } = require('../controller/user.controller')
 
 
 amqp.connect('amqp://localhost', async (error, connection) => {
@@ -42,6 +43,15 @@ amqp.connect('amqp://localhost', async (error, connection) => {
                     const objectId = new mongoose.Types.ObjectId(data.userId);
                     await deleteWallet(objectId)
                     console.log(`Wallet deleted for user`)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+            else if (action === 'user-logged-in') {
+                try {
+                    await updateLoginTime(data.userId)
+                    console.log("Update user logged in")
                 }
                 catch (err) {
                     console.log(err)

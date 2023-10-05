@@ -15,6 +15,14 @@ const UserSchema = new mongoose.Schema({
     },
     age: {
         type: Number
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    lastLogin: {
+        type: Date,
+        default: Date.now()
     }
 }, { timestamps: true, timeseries: true })
 

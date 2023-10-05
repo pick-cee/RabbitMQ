@@ -1,6 +1,6 @@
 const amqp = require('amqplib/callback_api')
 
-function setupRabbitMQ() {
+async function setupRabbitMQ() {
     amqp.connect('amqp://localhost', (error, connection) => {
         if (error) {
             console.error(error)
@@ -17,6 +17,7 @@ function setupRabbitMQ() {
 
             console.log(`Connected to RabbitMQ Queue: ${queue}`)
         })
+        return connection
     })
 }
 

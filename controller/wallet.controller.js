@@ -1,6 +1,7 @@
 const Wallet = require('../models/wallet.model')
 const { ObjectId } = require('mongodb')
 
+
 const createWallet = async (userId) => {
     await Wallet.findOne({ userId: userId }).lean(true)
         .then((w) => {
